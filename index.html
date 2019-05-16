@@ -16,13 +16,14 @@
         </header>
 
         <section class="score-panel">
+                <span>Time: </span><span class="clock">0:00</span>
         	<ul class="stars">
         		<li><i class="fa fa-star"></i></li>
         		<li><i class="fa fa-star"></i></li>
         		<li><i class="fa fa-star"></i></li>
         	</ul>
 
-        	<span class="moves">3</span> Moves
+        	<span class="moves">0</span> Moves
 
             <div class="restart">
         		<i class="fa fa-repeat"></i>
@@ -31,7 +32,24 @@
 
         <ul class="deck"></ul>
     </div>
-
+    <!--  GameOver-->
+    <div class="modal">
+            <div class="modal-content">
+                <div class="modal-heading">
+                    <h1>You Win!</h1>
+                </div>
+                <div class="modal-stats">
+                    <p>Time: <span class="modal-time"></span></p>
+                    <p>Stars: <span class="modal-stars"></span></p>
+                    <p>Moves: <span class="modal-moves"></span></p>
+                </div>
+                <div class="modal-buttons">
+                    <button class="modal-button modal-newGame">New Game</button>
+                    <button class="modal-button modal-close">Close</button>
+                </div>
+            </div>
+        </div>
+    
     <script src="js/app.js"></script>
 </body>
 </html>

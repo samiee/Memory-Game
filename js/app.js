@@ -72,10 +72,16 @@ initGame();
  allCards.forEach(function(card){
      card.addEventListener('click',function(e){
          if(!card.classList.contains('open')&& !card.classList.contains('show')&&!card.classList.contains('match')){
+            if (clockStopped) {
+                startClock();
+                clockStopped = false;
+            }
             openCards.push(card);
             card.classList.add('open','show');
 
             if (openCards.length==2){
+                addMove();
+
                 if(openCards[0].dataset.card == openCards[1].dataset.card){
                     openCards[0].classList.add('match');
                     openCards[0].classList.add('open');
@@ -84,8 +90,10 @@ initGame();
                     openCards[1].classList.add('match');
                     openCards[1].classList.add('open');
                     openCards[1].classList.add('show');
-                    addMove();
-                    movesToStars();
+                     
+                    matchedPairs++;
+                    if (matchedPairs === totalPairs) {
+                      gameOver();}
                     openCards=[];
 
                 }   else{
@@ -98,7 +106,8 @@ initGame();
                         ,1000);//HIDE
                 
                 }
-            
+         movesToStars();
+      
          }
         }
 
