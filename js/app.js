@@ -206,6 +206,7 @@ function restartGame() {
     resetCards();
     shuffleDeck();
     matchedPairs = 0;
+    openCards=[];
 }
 
 function resetTimeClock() {
