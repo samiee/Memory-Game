@@ -6,8 +6,12 @@
  let clockTimer;
  let matchedPairs = 0;
  const totalPairs = 8;
- const modal = document.querySelector('.modal');
- 
+
+ // close icon in modal
+ let closeicon = document.querySelector(".close");
+
+ // declare modal
+ let modal = document.getElementById("popup1") 
 var cards = ['fa-diamond','fa-diamond',
              'fa-paper-plane-o','fa-paper-plane-o',
              'fa-bicycle','fa-bicycle',
@@ -150,23 +154,39 @@ function clockText() {
 }
 function gameOver() {
     stopClock();
-    modalGameResults();
+    Swal.fire({
+        type: 'success',
+        title: 'Congratulations! You Won!',
+        html: `With ${moves} Moves and ${stars} Stars and  ${clockStopped.innerHTML} Time <br> Woooooo!`,
+        confirmButtonText: 'Play Again',
+        confirmButtonColor: '#47deb5'
+      }).then(function() {
+        restartGame()
+    });
+    
     toggleModal();
 }
 function toggleModal() {
     modal.classList.toggle("show-modal");
 }
-function modalGameResults() {
-    const timeStat = document.querySelector('.modal-time');
-    const clockTime =  document.querySelector('.clock').innerHTML;
-    const movesStat = document.querySelector('.modal-moves');
-    const starsStat = document.querySelector('.modal-stars');
-    const stars = numOfStars();
 
-    timeStat.innerHTML = `${clockTime}`;
-    movesStat.innerHTML = `${moves}`;
-    starsStat.innerHTML = `${stars}`;
+
+// @description close icon on modal
+function closeModal(){
+    closeicon.addEventListener("click", function(e){
+        modal.classList.remove("show");
+        startGame();
+    });
 }
+
+
+// @desciption for user to play Again 
+function playAgain(){
+    modal.classList.remove("show");
+    startGame();
+}
+
+
 function numOfStars() {
     stars = document.querySelectorAll('.stars li i');
     let starCount = 0;
@@ -194,20 +214,22 @@ document.querySelector('.modal-newGame').addEventListener('click', newGame);
 // Restart arrow button above deck
 document.querySelector('.restart').addEventListener('click', restartGame);
 
-function newGame() {
-    restartGame();
-    toggleModal();
-}
-
 function restartGame() {
+    openCards=[];
     resetTimeClock();
     resetStars();
     resetMoves();
     resetCards();
     shuffleDeck();
     matchedPairs = 0;
-    openCards=[];
 }
+
+function newGame() {
+    restartGame();
+    toggleModal();
+}
+
+
 
 function resetTimeClock() {
     stopClock();
@@ -216,8 +238,10 @@ function resetTimeClock() {
     clockText();
 }
 function movesToStars() {
-if (moves === 14 || moves === 18 || moves === 22) {
+if (moves === 14 || moves === 18) {
 subtractStar();
+}else{
+//Do nothing
 }
 }
 
@@ -234,9 +258,12 @@ function resetMoves() {
     document.querySelector('.moves').innerHTML = moves;
 }
 
+
+
 function resetCards() {
     const cards = document.querySelectorAll('.deck li');
     for (let card of cards) {
         card.className = 'card';
     }
 }
+
