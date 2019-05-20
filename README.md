@@ -30,3 +30,7 @@ For details, check out [CONTRIBUTING.md](CONTRIBUTING.md).
 
 ## Refrence :
 Webinar: FEND P3: Memory Game with Mike Wales
+
+## Dependencies :
+Dependencies
+Font Awesome | Sweet Alert css | Sweet Alert js | Font-Family Coda | 

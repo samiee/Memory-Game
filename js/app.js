@@ -6,8 +6,6 @@
  let clockTimer;
  let matchedPairs = 0;
  const totalPairs = 8;
-
-
  // declare modal
 var cards = ['fa-diamond','fa-diamond',
              'fa-paper-plane-o','fa-paper-plane-o',
@@ -152,10 +150,11 @@ function clockText() {
 }
 function gameOver() {
     stopClock();
-    Swal({
+
+    Swal.fire({
         type: 'success',
         title: 'Congratulations! You Won!',
-        html: `With ${moves} Moves and ${stars} Stars and  ${clockStopped.innerHTML} Time <br> Woooooo!`,
+        html: `With ${moves} Moves and ${stars} Stars and  ${clockStopped} Time <br> Woooooo!`,
         confirmButtonText: 'Play Again',
         confirmButtonColor: '#47deb5'
       }).then(function() {
@@ -182,7 +181,7 @@ function restartGame() {
     resetStars();
     resetMoves();
     resetCards();
-    shuffleDeck();
+    shuffle(cards);
     matchedPairs = 0;
 }
 
