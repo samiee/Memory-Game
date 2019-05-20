@@ -7,11 +7,8 @@
  let matchedPairs = 0;
  const totalPairs = 8;
 
- // close icon in modal
- let closeicon = document.querySelector(".close");
 
  // declare modal
- let modal = document.getElementById("popup1") 
 var cards = ['fa-diamond','fa-diamond',
              'fa-paper-plane-o','fa-paper-plane-o',
              'fa-bicycle','fa-bicycle',
@@ -107,7 +104,7 @@ initGame();
                             });
                             openCards=[]; 
                             }
-                        ,1000);//HIDE
+                        ,500);//HIDE
                 
                 }
          movesToStars();
@@ -118,6 +115,7 @@ initGame();
     });
  
 });
+document.querySelector('.restart').addEventListener('click', restartGame);
 function addMove() {
     moves++;
     const movesText = document.querySelector('.moves');
@@ -154,7 +152,7 @@ function clockText() {
 }
 function gameOver() {
     stopClock();
-    Swal.fire({
+    Swal({
         type: 'success',
         title: 'Congratulations! You Won!',
         html: `With ${moves} Moves and ${stars} Stars and  ${clockStopped.innerHTML} Time <br> Woooooo!`,
@@ -164,26 +162,6 @@ function gameOver() {
         restartGame()
     });
     
-    toggleModal();
-}
-function toggleModal() {
-    modal.classList.toggle("show-modal");
-}
-
-
-// @description close icon on modal
-function closeModal(){
-    closeicon.addEventListener("click", function(e){
-        modal.classList.remove("show");
-        startGame();
-    });
-}
-
-
-// @desciption for user to play Again 
-function playAgain(){
-    modal.classList.remove("show");
-    startGame();
 }
 
 
@@ -197,22 +175,6 @@ function numOfStars() {
     }
     return starCount;
 }
-document.querySelector('.modal-close').addEventListener('click', function() {
-    toggleModal();
-});
-
-function windowOnClick(event) {
-    if (event.target === modal) {
-        toggleModal();
-    }
-}
-window.addEventListener("click", windowOnClick);
-
-// Modal New Game button
-document.querySelector('.modal-newGame').addEventListener('click', newGame);
-
-// Restart arrow button above deck
-document.querySelector('.restart').addEventListener('click', restartGame);
 
 function restartGame() {
     openCards=[];
