@@ -1,21 +1,24 @@
-
  //* Create a list that holds all of your cards
  let moves = 0;
  let clockStopped = true;
  let time = 0;
+ stars=0;
+ timeText='';
  let clockTimer;
  let matchedPairs = 0;
  const totalPairs = 8;
+ 
  // declare modal
-var cards = ['fa-diamond','fa-diamond',
-             'fa-paper-plane-o','fa-paper-plane-o',
-             'fa-bicycle','fa-bicycle',
-             'fa-cube', 'fa-cube',
-             'fa-bomb','fa-bomb',
-             'fa-leaf','fa-leaf',
-             'fa-bolt','fa-bolt',
-             'fa-anchor','fa-anchor'
+var symbol = ['fa-diamond',
+             'fa-paper-plane-o',
+             'fa-bicycle',
+             'fa-cube', 
+             'fa-bomb',
+             'fa-leaf',
+             'fa-bolt',
+             'fa-anchor'
             ];  
+var cards=symbol.concat(symbol);
 function generateCard(card){
     return `<li class="card" data-card="${card}"><i class="fa ${card}"></i></li>`;
 }
@@ -63,8 +66,8 @@ function initGame(){
     });
     deck.innerHTML=cardHTML.join('');
 }
-
 initGame();
+
 
  var allCards=document.querySelectorAll('.card');
  var openCards=[];
@@ -119,16 +122,13 @@ function addMove() {
     const movesText = document.querySelector('.moves');
     movesText.innerHTML = moves;
 }
-function movesToStars() {
-    if (moves === 14 || moves === 18 || moves === 22) {
-        subtractStar();
-    }
-}
+
+
 function subtractStar() {
     const starPanel = document.querySelectorAll('.stars li i');
     for (star of starPanel) {
         if (star.classList.contains('fa')) {
-            star.classList.replace('fa', 'far');
+            star.classList.replace('fa', 'dimmed');
             break;
         }
     }
@@ -147,6 +147,8 @@ function clockText() {
     const minutes = Math.floor(time / 60);
     const seconds = time % 60;
     clock.innerHTML = (seconds < 10) ? (`${minutes}:0${seconds}`) : (`${minutes}:${seconds}`);
+    return timeText=clock.innerHTML;
+
 }
 function gameOver() {
     stopClock();
@@ -154,7 +156,7 @@ function gameOver() {
     Swal.fire({
         type: 'success',
         title: 'Congratulations! You Won!',
-        html: `With ${moves} Moves and ${stars} Stars and  ${clockStopped} Time <br> Woooooo!`,
+        html: `With ${moves} Moves and ${stars.innerHTML} Star  and ${time.innerHTML} Seconds <br> Woooooo!`,
         confirmButtonText: 'Play Again',
         confirmButtonColor: '#47deb5'
       }).then(function() {
@@ -165,14 +167,15 @@ function gameOver() {
 
 
 function numOfStars() {
-    stars = document.querySelectorAll('.stars li i');
+     stars = document.querySelectorAll('.stars li i');
     let starCount = 0;
     for (star of stars) {
-        if (!star.classList.contains('far')) {
+        if (!star.classList.contains('dimmed')) {
             starCount++;
         }
+
     }
-    return starCount;
+    stars=starCount;
 }
 
 function restartGame() {
@@ -181,14 +184,12 @@ function restartGame() {
     resetStars();
     resetMoves();
     resetCards();
-    shuffle(cards);
+    
+
     matchedPairs = 0;
 }
 
-function newGame() {
-    restartGame();
-    toggleModal();
-}
+
 
 
 
@@ -210,7 +211,7 @@ function resetStars() {
     stars = 0;
     const starPanel = document.querySelectorAll('.stars li i');
     for (star of starPanel) {
-        star.classList.replace('far', 'fa');
+        star.classList.replace('dimmed', 'fa');
     }
 }
 

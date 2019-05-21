@@ -6,6 +6,7 @@ html {
 *::before,
 *::after {
     box-sizing: inherit;
+    
 }
 
 html,
@@ -85,28 +86,35 @@ h1 {
  * Styles for the Score Panel
  */
 
-.score-panel {
-    text-align: left;
-    width: 345px;
-    margin-bottom: 10px;
+ .score-panel {
+  text-align: left;
+  width: 450px;
+  margin-bottom: 10px;
+  font-size: 1.50rem;
 }
 
 .score-panel .stars {
-    margin: 0;
-    padding: 0;
-    display: inline-block;
-    margin: 0 5px 0 0;
+  margin: 0 1.25rem 0 0;
+  padding: 0;
+  display: inline-block;
+  color: #f1c40f;
 }
 
 .score-panel .stars li {
-    list-style: none;
-    display: inline-block;
+  list-style: none;
+  display: inline-block;
 }
 
 .score-panel .restart {
-    float: right;
-    cursor: pointer;
+  float: right;
+  cursor: pointer;
+  color: #d35400;
 }
+
+.dimmed {
+  display: none;
+}
+
 @keyframes flipY {
     from {
         transform: perspective(400px) rotate3d(0, 1, 0, 90deg);
