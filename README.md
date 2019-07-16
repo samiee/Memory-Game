@@ -1,4 +1,5 @@
 # Memory Game Project
+[Live Preview](https://samiee.github.io/Memory-Game/)
 
 ## Table of Contents
 

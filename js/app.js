@@ -2,8 +2,9 @@
  let moves = 0;
  let clockStopped = true;
  let time = 0;
- stars=0;
+ let stars=0;
  timeText='';
+ let starCount = 0;
  let clockTimer;
  let matchedPairs = 0;
  const totalPairs = 8;
@@ -156,7 +157,7 @@ function gameOver() {
     Swal.fire({
         type: 'success',
         title: 'Congratulations! You Won!',
-        html: `With ${moves} Moves and ${stars.innerHTML} Star  and ${time.innerHTML} Seconds <br> Woooooo!`,
+        html: `With ${moves} Moves and ${starCount} Star  and ${time} Seconds <br> Woooooo!`,
         confirmButtonText: 'Play Again',
         confirmButtonColor: '#47deb5'
       }).then(function() {
@@ -168,14 +169,12 @@ function gameOver() {
 
 function numOfStars() {
      stars = document.querySelectorAll('.stars li i');
-    let starCount = 0;
     for (star of stars) {
         if (!star.classList.contains('dimmed')) {
             starCount++;
         }
 
     }
-    stars=starCount;
 }
 
 function restartGame() {
@@ -208,7 +207,6 @@ subtractStar();
 }
 
 function resetStars() {
-    stars = 0;
     const starPanel = document.querySelectorAll('.stars li i');
     for (star of starPanel) {
         star.classList.replace('dimmed', 'fa');
